@@ -1,12 +1,10 @@
-// User data management
-
 let userData = {
   name: "",
   city: "",
   profilePhoto: "",
 };
 
-// Check if user data exists in localStorage
+
 function checkUserData() {
   const stored = localStorage.getItem("weatherAppUser");
 
@@ -18,7 +16,7 @@ function checkUserData() {
   }
 }
 
-// Update UI with user data
+
 function updateUIWithUserData() {
   document.getElementById("headerName").textContent = userData.name;
   document.getElementById("headerProfile").src =
@@ -26,7 +24,7 @@ function updateUIWithUserData() {
   updateTime();
 }
 
-// Handle onboarding form submission
+
 document
   .getElementById("onboardingForm")
   .addEventListener("submit", function (e) {
@@ -39,7 +37,7 @@ document
     fetchWeather(userData.city);
   });
 
-// Handle profile photo upload
+
 document
   .getElementById("profilePhoto")
   .addEventListener("change", function (e) {
@@ -59,7 +57,7 @@ document
     }
   });
 
-// Search functionality
+
 const searchIcon = document.getElementById("searchIcon");
 const searchOverlay = document.getElementById("searchOverlay");
 const closeSearch = document.getElementById("closeSearch");
@@ -85,7 +83,7 @@ searchInput.addEventListener("keypress", (e) => {
   }
 });
 
-// Update time
+
 function updateTime() {
   const now = new Date();
   const timeString = now.toLocaleTimeString("en-US", {
