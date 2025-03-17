@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://https://dusprogram.github.io/dus-weather/sitemap.xml
