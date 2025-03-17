@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dus Weather | Real-time Weather Updates</title>
+    <meta name="title" content="Dus Weather | Real-time Weather Updates">
+    <meta name="description" content="Get accurate, real-time weather forecasts for any city worldwide. Features include personalized dashboard, temperature, humidity, wind speed, and more.">
+    <meta name="keywords" content="weather, forecast, real-time weather, weather dashboard, temperature, humidity, wind speed, weather app, dusmamud, dus, dus program, dusprogram, dus mamud, dusprogram github, bijni, guwahati">
+    <meta name="author" content="Dus Mamud">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dusprogram.github.io/dus-weather/">
+    <meta property="og:title" content="Dus Weather | Real-time Weather Dashboard">
+    <meta property="og:description" content="A modern, responsive weather dashboard with real-time updates, user personalization, and dynamic day/night visualization.">
+    <meta property="og:image" content="https://dusprogram.github.io/dus-weather/assets/preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dusprogram.github.io/dus-weather/">
+    <meta property="twitter:title" content="Dus Weather | Real-time Weather Dashboard">
+    <meta property="twitter:description" content="A modern, responsive weather dashboard with real-time updates, user personalization, and dynamic day/night visualization.">
+    <meta property="twitter:image" content="https://dusprogram.github.io/dus-weather/assets/preview.jpg">
+
+    <meta name="theme-color" content="#4361ee">
+
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Dus Weather",
+          "applicationCategory": "WeatherApplication",
+          "operatingSystem": "Web",
+          "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "INR"
+          },
+          "author": {
+              "@type": "Person",
+              "name": "Dus Mamud",
+              "url": "https://github.com/dusprogram"
+          },
+          "description": "A modern, responsive weather dashboard with real-time updates, user personalization, and dynamic day/night visualization.",
+          "softwareVersion": "1.0.0",
+          "screenshot": "https://dusprogram.github.io/dus-weather/assets/preview.jpg",
+          "featureList": [
+              "Real-time weather updates",
+              "User personalization",
+              "Dynamic day/night visualization",
+              "City search functionality",
+              "Responsive design"
+          ],
+          "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "ratingCount": "10"
+          }
+      }
+      </script>
+      <!-- Website Schema -->
+    <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": "https://dusprogram.github.io/dus-weather/",
+          "name": "Dus Weather",
+          "description": "Real-time weather dashboard with user personalization",
+          "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://dusprogram.github.io/dus-weather/?city={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+          }
+      }
+      </script>
+      <!-- Person Schema -->
+    <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Dus Mamud",
+          "url": "https://github.com/dusprogram",
+          "sameAs": [
+              "https://www.linkedin.com/in/dus-mamud-9177b8287/",
+              "https://x.com/beingdusmamud"
+              "https://github.com/beingdusmamud"
+              "https://www.instagram.com/dvmx_19"
+              "http://facebook.com/dusmamud01/"
+              
+
+
+          ]
+      }
+      </script>
+      <!-- Additional Meta Tags for PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Dus Weather">
+    <meta name="apple-mobile-web-app-title" content="Dus Weather">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-TileColor" content="#4361ee">
+  </head>
+  <body>
+    <!-- Onboarding Modal -->
+    <div class="onboarding-overlay" id="onboardingModal">
+      <div class="onboarding-modal animate-fade-in">
+        <h2 style="margin-bottom: 1.5rem">Welcome to Dus Weather</h2>
+        <form class="onboarding-form" id="onboardingForm">
+          <div class="form-group">
+            <label for="userName">Your Name</label>
+            <input
+              type="text"
+              id="userName"
+              required
+              placeholder="Enter your name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="userCity">Your City</label>
+            <input
+              type="text"
+              id="userCity"
+              required
+              placeholder="Enter your city name"
+            />
+          </div>
+          <div class="form-group">
+            <label>Profile Photo</label>
+            <div class="profile-upload">
+              <img
+                id="profilePreview"
+                class="profile-preview"
+                src="assets/upload.svg"
+                alt="Profile preview"
+              />
+              <input
+                type="file"
+                id="profilePhoto"
+                accept="image/*"
+                style="display: none"
+              />
+              <button
+                type="button"
+                class="upload-btn"
+                onclick="document.getElementById('profilePhoto').click()"
+              >
+                Upload Photo
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="upload-btn" style="margin-top: 1rem">
+            Get Started
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard">
+      <header class="header">
+        <div class="user-profile">
+          <img id="headerProfile" src="assets/user.svg" alt="Profile" />
+          <div>
+            <h2 class="welcome-text">
+              Hello,
+              <span id="headerName"><i class="bx bx-loader bx-spin"></i></span>
+            </h2>
+            <p class="current-time" id="currentTime">Loading...</p>
+          </div>
+        </div>
+        <div class="search-container">
+          <i class="bx bx-search search-icon" id="searchIcon"></i>
+        </div>
+      </header>
+
+      <!-- Search Overlay -->
+      <div class="search-overlay" id="searchOverlay">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search for a city..."
+          id="searchInput"
+        />
+        <i
+          class="bx bx-x search-icon"
+          style="font-size: 2rem"
+          id="closeSearch"
+        ></i>
+      </div>
+
+      <div class="weather-grid">
+        <div class="weather-card animate-fade-in">
+          <div class="weather-info">
+            <div>
+              <h3 id="cityName">Loading...</h3>
+              <p id="weatherCondition">Updating...</p>
+            </div>
+            <div class="temperature" id="temperature">--°C</div>
+          </div>
+          <div id="dayNightIcon" class="day-night-icon"></div>
+          <div class="weather-details">
+            <div class="detail-item">
+              <i class="bx bx-water"></i>
+              <div>
+                <p>Humidity</p>
+                <strong id="humidity">--%</strong>
+              </div>
+            </div>
+            <div class="detail-item">
+              <i class="bx bx-wind"></i>
+              <div>
+                <p>Wind Speed</p>
+                <strong id="windSpeed">-- km/h</strong>
+              </div>
+            </div>
+            <div class="detail-item">
+              <i class="bx bx-sun"></i>
+              <div>
+                <p>Feels Like</p>
+                <strong id="feelsLike">--°C</strong>
+              </div>
+            </div>
+            <div class="detail-item">
+              <i class="bx bx-cloud"></i>
+              <div>
+                <p>Pressure</p>
+                <strong id="pressure">-- hPa</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script type="module" src="js/weatherApi.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+  </body>
+</html>

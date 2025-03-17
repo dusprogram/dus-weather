@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found | Dus Weather</title>
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon" />
+    <style>
+      :root {
+        --primary: #4361ee;
+        --secondary: #3f37c9;
+        --accent: #4cc9f0;
+        --dark: #2b2d42;
+        --light: #f8f9fa;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--light);
+        overflow: hidden;
+      }
+
+      .error-container {
+        text-align: center;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .error-number {
+        font-size: clamp(100px, 20vw, 200px);
+        font-weight: 900;
+        background: linear-gradient(45deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1;
+        letter-spacing: -5px;
+        margin-bottom: 1rem;
+        position: relative;
+        animation: floatNumber 3s ease-in-out infinite;
+      }
+
+      .error-title {
+        font-size: clamp(24px, 5vw, 36px);
+        color: var(--dark);
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards 0.5s;
+      }
+
+      .error-message {
+        font-size: clamp(16px, 3vw, 18px);
+        color: #666;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards 0.7s;
+      }
+
+      .back-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards 0.9s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+      }
+
+      .back-button:active {
+        transform: translateY(0);
+      }
+
+      .back-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: 0.5s;
+      }
+
+      .back-button:hover::before {
+        left: 100%;
+      }
+
+      .weather-elements {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+
+      .weather-element {
+        position: absolute;
+        animation: float 20s linear infinite;
+        opacity: 0.1;
+      }
+
+      @keyframes floatNumber {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        100% {
+          transform: translate(var(--moveX), var(--moveY)) rotate(360deg);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .error-container {
+          padding: 1rem;
+        }
+
+        .weather-elements {
+          opacity: 0.05;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .error-number,
+        .weather-element,
+        .back-button::before {
+          animation: none;
+        }
+      }
+
+      /* Dark Mode Support */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: var(--dark);
+        }
+
+        .error-title {
+          color: var(--light);
+        }
+
+        .error-message {
+          color: #aaa;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="weather-elements" id="weatherElements"></div>
+
+    <div class="error-container">
+      <h1 class="error-number">404</h1>
+      <h2 class="error-title">Page Not Found</h2>
+      <p class="error-message">
+        Looks like you've ventured into uncharted weather territory! Don't
+        worry, our meteorological compass will guide you back home.
+      </p>
+      <a href="https://dusprogram.github.io/dus-weather/" class="back-button"
+        >Back to Homepage</a
+      >
+    </div>
+
+    <script>
+      // Generate weather elements
+      const weatherElements = document.getElementById("weatherElements");
+      const elements = ["🌧", "⛅", "🌤", "⛈", "❄️", "🌪", "🌈", "⚡", "🌊", "🌫"];
+
+      for (let i = 0; i < 20; i++) {
+        const element = document.createElement("div");
+        element.className = "weather-element";
+        element.textContent =
+          elements[Math.floor(Math.random() * elements.length)];
+        element.style.fontSize = `${Math.random() * 30 + 20}px`;
+        element.style.left = `${Math.random() * 100}%`;
+        element.style.top = `${Math.random() * 100}%`;
+        element.style.setProperty(
+          "--moveX",
+          `${(Math.random() - 0.5) * 100}vw`
+        );
+        element.style.setProperty(
+          "--moveY",
+          `${(Math.random() - 0.5) * 100}vh`
+        );
+        element.style.animationDelay = `${Math.random() * 5}s`;
+        weatherElements.appendChild(element);
+      }
+    </script>
+  </body>
+</html>
