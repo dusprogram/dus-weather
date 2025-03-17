@@ -142,7 +142,7 @@ const nightIcon = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
 async function fetchWeather(city) {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=35e1b737845d46a4a42162457251703&q=${city}&aqi=yes`
+      `https://api.weatherapi.com/v1/current.json?key=80347faa3d204d4d849205156251703&q=${city}&aqi=yes`
     );
 
     const data = await response.json();
